@@ -16,7 +16,7 @@ class PostController extends Controller
 {
     /**
      * index
-     * 
+     *
      * @return void
      */
     public function index()
@@ -29,7 +29,7 @@ class PostController extends Controller
     }
     /**
      * store
-     * 
+     *
      * @param mixed $request
      * @return void
      */
@@ -58,7 +58,7 @@ class PostController extends Controller
 
     /**
      * show
-     * 
+     *
      * @param mixed $post
      * @return void
      */
@@ -73,9 +73,10 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+        //make validator
         $validator = Validator::make($request->all(),[
             'title' =>'required | min:10',
-            'content' =>'required | min:10', 
+            'content' =>'required | min:10',
         ]);
 
         //check validator
@@ -95,6 +96,7 @@ class PostController extends Controller
             //delete old image
             Storage::delete('public/posts/' . basename($post->image));
 
+            //update post
             $post->update([
                 'image' => $image->hashName(),
                 'title' => $request->title,
@@ -115,7 +117,7 @@ class PostController extends Controller
 
     /**
      * destroy
-     * 
+     *
      * @param mixed $post
      * @return void
      */
